@@ -18,6 +18,7 @@ class Roles:
 
     @commands.command(pass_context=True)
     async def invites(self, ctx):
+        """Shows the invites"""
         author = ctx.message.author
         for user_invite in data.users_invites.values():
             if user_invite[0].id == author.id:
