@@ -11,7 +11,7 @@ class Roles:
         self.bot = bot
 
     @commands.command(pass_context=True)
-    @commands.has_role('ADMIN')
+    @commands.has_permissions(manage_server=True)
     async def init(self, ctx):
         data.server = ctx.message.server
         await self.bot.say('Prepared for duty in {} guild!'.format(data.server.name))
