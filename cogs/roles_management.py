@@ -29,7 +29,7 @@ class Roles:
     @commands.command(pass_context=True)
     async def rank(self, ctx):
         message = ''
-        for rank, invites in roles.items():
+        for invites, rank in roles.items():
             message += '**{}** - {} invites\n'.format(rank, invites)
         embed = discord.Embed(title='Ranking system', description=message, color=0xfff71e)
         await self.bot.send_message(ctx.message.channel, embed=embed)
