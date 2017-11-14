@@ -21,8 +21,9 @@ class RolesConfig:
     @commands.has_permissions(manage_server=True)
     async def add_role(self, ctx, role_name: str, invites_needed: int):
         """<role-name><invites-needed>"""
-        roles[role_name] = invites_needed
+        roles[invites_needed] = role_name
         await self.bot.say('Role added to ranking! Type !rank for seeing it')
+
 
 def setup(bot: commands.Bot):
     bot.add_cog(RolesConfig(bot))
