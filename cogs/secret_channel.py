@@ -20,7 +20,7 @@ class Secret:
         await self.bot.send_message(channel,
                                     '**{}** created. Now I\'ll invite users ordered by rank...'.format(channel_name))
 
-        for rank in roles:
+        for rank in roles.values():
             await asyncio.sleep(15)
             role = discord.utils.get(data.server.roles, name=rank)
             permissions = discord.PermissionOverwrite(read_messages=True)
