@@ -20,12 +20,19 @@ class Roles:
     async def invites(self, ctx):
         """Shows the invites"""
         author = ctx.message.author
+
+        has_rank = False
+
         for user_invite in data.users_invites.values():
             if user_invite[0].id == author.id:
                 await self.bot.say('<@{}> Total invites: {}'.format(user_invite[0].id, user_invite[1]))
                 next_rank, invites_needed = get_next_role(user_invite[1])
                 await self.bot.say('<@{}> You need {}  invites for {}'.format(
                     user_invite[0].id, invites_needed - user_invite[1], next_rank))
+                has_rank = True
+        if not has_rank:
+            await self.bot.say('<@{}> You have no invites!')
+            await self.bot.say('<@{}> You need 2 more invites for Noob')
 
     @commands.command(pass_context=True)
     async def rank(self, ctx):
