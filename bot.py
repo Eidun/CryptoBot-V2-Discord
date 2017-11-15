@@ -46,7 +46,7 @@ async def on_member_join(member:discord.Member):
             '- To get ranks in affiliate system, start from generating referral link,' \
             ' this is how you do it {}'.format(member.id, new_channel.mention,
                                                pumps_channel.mention, rank_channel.mention)
-    channel = bot.get_channel('380206015024594956')
+    channel = bot.get_channel('378720335790473228')
     await bot.send_message(channel, greet)
 
 # Test bot
