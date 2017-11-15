@@ -1,6 +1,6 @@
 import discord
 import utils.data as data
-from utils.roles import get_role, get_next_role, roles
+from utils.roles import get_role, get_next_role, get_previous_role, roles
 from discord.ext import commands
 import asyncio
 
@@ -30,8 +30,8 @@ class Roles:
                     user_invite[0].id, invites_needed - user_invite[1], next_rank))
                 has_rank = True
         if not has_rank:
-            await self.bot.say('<@{}> You have no invites!')
-            await self.bot.say('<@{}> You need 2 more invites for Noob')
+            await self.bot.say('<@{}> You have no invites!'.format(ctx.message.author.id))
+            await self.bot.say('<@{}> You need 2 more invites for Noob'.format(ctx.message.author.id))
 
     @commands.command(pass_context=True)
     async def rank(self, ctx):
@@ -85,22 +85,26 @@ async def assign_roles(bot):
         return
     print('Setting roles...')
     for user_invite in data.users_invites.values():
+
         # Get stored data
         user = user_invite[0]
         invites = user_invite[1]
+        # Set the role
+        member = discord.utils.get(data.server.members, name=user.name)
+        if member is None:
+            continue
         print('{} with {} invites'.format(user.display_name, invites))
         # Get the proper role based on invites
         role_name = get_role(invites)
+        if member.top_role.name == role_name or member.top_role.name == 'Admin':
+            print('Same rol as before')
+            return
         print(role_name)
         role = discord.utils.get(data.server.roles, name=role_name)
         if role is None:
             continue
         print('Role-> ' + role.name)
-        # Set the role
-        member = discord.utils.get(data.server.members, name=user.name)
-        if member is None:
-            continue
-        print(member)
+        await bot.remove_roles(member, member.top_role)
         await bot.add_roles(member, role)
 
 
