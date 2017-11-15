@@ -15,10 +15,11 @@ def get_next_role(number: int):
             return roles[invites_needed], invites_needed
 
 roles = {
-    100: 'Rank1',
-    50: 'Rank2',
-    10: 'Rank3',
-    5: 'Rank4',
-    3: 'Rank5',
-    1: 'Rank6'
+    0: 'Free',
+    2: 'Noob',
+    10: 'CryptoNoob',
+    25: 'Beginner',
+    50: 'CryptoNova',
+    80: 'CryptoMaster',
+    150: 'CryptoExpert'
 }
