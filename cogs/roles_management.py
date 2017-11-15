@@ -6,7 +6,6 @@ import asyncio
 
 
 class Roles:
-
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
@@ -52,6 +51,7 @@ class Roles:
                               .format(online_members.__len__(), members.__len__()), color=0xfff71e)
         await self.bot.send_message(ctx.message.channel, embed=embed)
 
+
 async def rli(bot):
     # Get the current invites
     while not bot.is_closed:
@@ -73,36 +73,35 @@ async def rli(bot):
                 difference = invite.uses - old_uses
                 data.invites[invite.id] = invite
                 data.users_invites[inviter.id][1] += difference
-
         print(data.users_invites)
         print(data.invites)
         await assign_roles(bot)
 
+
 async def assign_roles(bot):
-    while not bot.is_closed:
-        await asyncio.sleep(20)
-        # Check if server is ready and registered
-        if data.server is None:
+    await asyncio.sleep(5)
+    # Check if server is ready and registered
+    if data.server is None:
+        return
+    print('Setting roles...')
+    for user_invite in data.users_invites.values():
+        # Get stored data
+        user = user_invite[0]
+        invites = user_invite[1]
+        print('{} with {} invites'.format(user.display_name, invites))
+        # Get the proper role based on invites
+        role_name = get_role(invites)
+        print(role_name)
+        role = discord.utils.get(data.server.roles, name=role_name)
+        if role is None:
             continue
-        print('Setting roles...')
-        for user_invite in data.users_invites.values():
-            # Get stored data
-            user = user_invite[0]
-            invites = user_invite[1]
-            print('{} with {} invites'.format(user.display_name, invites))
-            # Get the proper role based on invites
-            role_name = get_role(invites)
-            print(role_name )
-            role = discord.utils.get(data.server.roles, name=role_name)
-            if role is None:
-                continue
-            print('Role-> ' + role.name)
-            # Set the role
-            member = discord.utils.get(data.server.members, name=user.name)
-            if member is None:
-                continue
-            print(member)
-            await bot.add_roles(member, role)
+        print('Role-> ' + role.name)
+        # Set the role
+        member = discord.utils.get(data.server.members, name=user.name)
+        if member is None:
+            continue
+        print(member)
+        await bot.add_roles(member, role)
 
 
 def setup(bot: commands.Bot):
