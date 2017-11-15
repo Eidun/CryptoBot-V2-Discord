@@ -76,6 +76,7 @@ async def rli(bot):
 
         print(data.users_invites)
         print(data.invites)
+        await assign_roles(bot)
 
 async def assign_roles(bot):
     while not bot.is_closed:
@@ -107,4 +108,3 @@ async def assign_roles(bot):
 def setup(bot: commands.Bot):
     bot.add_cog(Roles(bot))
     bot.loop.create_task(rli(bot))
-    bot.loop.create_task(assign_roles(bot))
