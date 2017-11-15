@@ -37,10 +37,15 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member:discord.Member):
-    greet = 'Welcome, <@{}>!\n- Please, read the <@380203802969505792>.\n' \
-            'Pump announcements and signals are posted in <@380204258529771532>.\n' \
+    new_channel = bot.get_channel('380203802969505792')
+    pumps_channel = bot.get_channel('380204258529771532')
+    rank_channel = bot.get_channel('380203911329480714')
+
+    greet = 'Welcome, <@{}>!\n- Please, read the {}.\n' \
+            'Pump announcements and signals are posted in {}.\n' \
             '- To get ranks in affiliate system, start from generating referral link,' \
-            ' this is how you do it <@380203911329480714>'.format(member.id)
+            ' this is how you do it {}'.format(member.id, new_channel.mention,
+                                               pumps_channel.mention, rank_channel.mention)
     channel = bot.get_channel('380206015024594956')
     await bot.send_message(channel, greet)
 
