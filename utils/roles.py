@@ -24,7 +24,6 @@ def get_previous_role(number: int):
             return roles[previous], previous
         previous = invites_needed
 
-
 roles = {
     0: 'Free',
     2: 'Noob',
