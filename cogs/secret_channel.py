@@ -58,7 +58,10 @@ class Secret:
                     if invited_message is not None:
                         await self.bot.delete_message(invited_message)
                     invited_message = await self.bot.send_message(channel, out_message + 'invited!')
+                    await self.bot.edit_message(remanining_message, '**Members remaining:** {}'
+                                                .format(count_members - count_invited))
                     out_message = ''
+                    count = 0
                     await asyncio.sleep(15)
                 permissions = discord.PermissionOverwrite(read_messages=True)
                 await self.bot.edit_channel_permissions(channel, member, permissions)
