@@ -2,7 +2,8 @@ import sys
 import traceback
 import discord
 from discord.ext import commands
-import utils.roles
+from utils.roles import get_role
+import utils.data as data
 
 
 description = '''Ironman-Bot'''
@@ -48,6 +49,18 @@ async def on_member_join(member:discord.Member):
                                                pumps_channel.mention, rank_channel.mention)
     channel = bot.get_channel('378720335790473228')
     await bot.send_message(channel, greet)
+    if data is not None:
+        role = discord.utils.get(data.server.roles, name=get_role(0))
+        await bot.add_roles(member, role)
 
+
+@bot.command(pass_context=True)
+async def free_test(ctx):
+    members = ctx.message.server.members
+    no_role_members = list(filter(lambda x: x.roles.__len__() == 1, members))
+    if data is not None:
+        role = discord.utils.get(data.server.roles, name=get_role(0))
+        for no_role_member in no_role_members:
+            await bot.add_roles(no_role_member, role)
 # Test bot
 bot.run('MzgwMDUyNTc3NDU2MzU3Mzc2.DOy_HA.xIika7xdqcpt2zcT8PT1GoXTFM4')
