@@ -49,7 +49,7 @@ async def on_member_join(member:discord.Member):
                                                pumps_channel.mention, rank_channel.mention)
     channel = bot.get_channel('378720335790473228')
     await bot.send_message(channel, greet)
-    if data is not None:
+    if data.server is not None:
         role = discord.utils.get(data.server.roles, name=get_role(0))
         await bot.add_roles(member, role)
 
