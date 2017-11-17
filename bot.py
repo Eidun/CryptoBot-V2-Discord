@@ -58,7 +58,7 @@ async def on_member_join(member:discord.Member):
 async def free_test(ctx):
     members = ctx.message.server.members
     no_role_members = list(filter(lambda x: x.roles.__len__() == 1, members))
-    if data is not None:
+    if data.server is not None:
         role = discord.utils.get(data.server.roles, name=get_role(0))
         for no_role_member in no_role_members:
             await bot.add_roles(no_role_member, role)
