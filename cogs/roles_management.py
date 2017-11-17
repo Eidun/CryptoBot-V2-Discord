@@ -55,7 +55,7 @@ class Roles:
 async def rli(bot):
     # Get the current invites
     while not bot.is_closed:
-        await asyncio.sleep(15)
+        await asyncio.sleep(35)
         # Check if server is ready and registered
         if data.server is None:
             continue
