@@ -106,6 +106,7 @@ async def assign_roles(bot):
         print('Role-> ' + role.name)
         await bot.remove_roles(member, member.top_role)
         await bot.add_roles(member, role)
+        await asyncio.sleep(0.1)
 
 
 def setup(bot: commands.Bot):

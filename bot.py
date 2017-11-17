@@ -53,18 +53,5 @@ async def on_member_join(member:discord.Member):
     await bot.add_roles(member, role)
 
 
-@bot.command(pass_context=True)
-async def free_test(ctx):
-    print('Here')
-    members = ctx.message.server.members
-    print(members.__len__())
-    no_role_members = list(filter(lambda x: x.roles.__len__() == 1, members))
-    print(no_role_members.__len__())
-    role = discord.utils.get(data.server.roles, name=get_role(0))
-    for no_role_member in no_role_members:
-        print('New free added')
-        await bot.add_roles(no_role_member, role)
-
-
 # Test bot
 bot.run('MzgwMDUyNTc3NDU2MzU3Mzc2.DOy_HA.xIika7xdqcpt2zcT8PT1GoXTFM4')
