@@ -98,7 +98,7 @@ async def assign_roles(bot):
         role_name = get_role(invites)
         if member.top_role.name == role_name or member.top_role.name == 'Admin':
             print('Same rol as before')
-            return
+            continue
         print(role_name)
         role = discord.utils.get(data.server.roles, name=role_name)
         if role is None:
