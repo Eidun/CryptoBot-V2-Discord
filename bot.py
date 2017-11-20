@@ -54,4 +54,4 @@ async def on_member_join(member:discord.Member):
 
 
 # Test bot
-bot.run('MzgwMDUyNTc3NDU2MzU3Mzc2.DOy_HA.xIika7xdqcpt2zcT8PT1GoXTFM4')
+bot.run('')
